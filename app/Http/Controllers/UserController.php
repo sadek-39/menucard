@@ -86,7 +86,7 @@ class UserController extends Controller
             $response=json_decode($response);
             $token=$response->access_token;
             session(["token"=>$token]);
-            return view('login-successful',['data'=>$token]);
+            return redirect('/home');
         }else{
             return view('welcome');
         }
