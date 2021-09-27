@@ -80,9 +80,17 @@ class UserController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $_SESSION['token']=$response;
-        return $response;
-
+        
+       
+        if(!empty($response)){
+            $response=json_decode($response);
+            $token=$response->access_token;
+            session(["token"=>$token]);
+            return view('login-successful',['data'=>$token]);
+        }else{
+            return view('welcome');
+        }
+        
     }
 
     /**
@@ -142,6 +150,7 @@ class UserController extends Controller
     }
     public function profile()
     {
+        $token=session('token');
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -154,13 +163,14 @@ class UserController extends Controller
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzMjY1MTU2MiwiZXhwIjoxNjMyNjU1MTYyLCJuYmYiOjE2MzI2NTE1NjIsImp0aSI6InhEUjJDbmN6bXJleGJIZDkiLCJzdWIiOjYsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.C5En7J--UsgNuWoI5_P-ekDGun8jvvncJPcA9FAK7K8'
-         ),
+            'Authorization: Bearer '.$token.''
+        )
         ));
 
         $response = curl_exec($curl);
 
         curl_close($curl);
-        echo $response;
+        $response=json_decode($response);
+        return view('profile',['data' => $response]);
     }
 }

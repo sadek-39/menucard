@@ -24,3 +24,7 @@ Route::get('/menu-card',[MenuController::class,'index'])->name('menu-card');
 Route::get('/generate-qrcode', [QrCode::class, 'index'])->name('qr-code');
 Route::post('/login',[UserController::class,'login'])->name('login');
 Route::get('/loginform',[UserController::class,'loginform'])->name('loginform');
+Route::get('/profile',[UserController::class,'profile'])->name('profile');
+Route::get('/edit-menu-card',function(){
+    return view('menu-card-edit');
+})->name('edit-menu-card');

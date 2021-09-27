@@ -17,7 +17,7 @@
                 <h2>Simple QR Code</h2>
             </div>
             <div class="card-body">
-                {!! QrCode::size(300)->generate('http://127.0.0.1:8000/menu-card') !!}
+                {!! QrCode::size(300)->generate(route('menu-card')) !!}
             </div>
         </div>
 
@@ -26,7 +26,7 @@
                 <h2>Color QR Code</h2>
             </div>
             <div class="card-body">
-                {!! QrCode::size(300)->backgroundColor(255,90,0)->generate('http://127.0.0.1:8000/menu-card') !!}
+                {!! QrCode::size(300)->backgroundColor(255,90,0)->generate(route('menu-card')) !!}
             </div>
         </div>
 
