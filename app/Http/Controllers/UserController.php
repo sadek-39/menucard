@@ -53,7 +53,7 @@ class UserController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        return  $response;
+        return  view('registration-success');
     }
     public function login(Request $request){
         $data=array(
@@ -150,27 +150,6 @@ class UserController extends Controller
     }
     public function profile()
     {
-        $token=session('token');
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://localhost:8000/api/me',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer '.$token.''
-        )
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        $response=json_decode($response);
-        return view('profile',['data' => $response]);
+        return view('profile');
     }
 }

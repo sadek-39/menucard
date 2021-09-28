@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\ApiController;
 use App\Models\Food;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,21 @@ class FoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data=array(
+            'food_name'=>$request->food_name,
+            'quantity'=>$request->food_quantity,
+            'food_details'=>$request->food_details,
+            'food_status'=>$request->food_status,
+            'food_price'=>$request->food_price,
+            'user_id'=>$request->user_id
+        );
+        $food_obj=new ApiController();
+       
+        $token=session('token');
+        $response_food_create=$food_obj->create_food($token,$data);
+        return redirect('/home');
     }
 
     /**

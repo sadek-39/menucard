@@ -10,6 +10,7 @@
     <title>Menu</title>
 </head>
 <body>
+    
     <h1>Menu Card</h1>
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -23,14 +24,17 @@
             </tr>
         </thead>
         <tbody>
+            @foreach ($data_find_food as $item)
             <tr>
                 <td>1</td>
-                <td>Masala Chicken</td>
-                <td>1</td>
-                <td>Masala with fried Chicken</td>
-                <td>Available</td>
-                <td>400TK</td>
-            </tr>
+                <td>{{$item->food_name}}</td>
+                <td>{{$item->quantity}}</td>
+                <td>{{$item->food_details}}</td>
+                <td>{{$item->food_status}}</td>
+                <td>{{$item->food_price}}</td>
+            </tr>    
+            @endforeach
+            
            
            
            

@@ -12,9 +12,13 @@ class MenuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request,$id)
     {
-        return view("menu");
+        $api_obj=new ApiController();
+        $token=session('token');
+        $find_food=$api_obj->find_food($token,$id);
+        $data=json_decode($find_food);
+        return view("menu",['data_find_food'=>$data]);
     }
 
     /**
