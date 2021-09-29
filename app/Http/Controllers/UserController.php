@@ -29,30 +29,39 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
+        $request->validate([
+            'business_name'=>'required',
+            'email'=>'required',
+            'password'=>'required|min:6',
+            'mobile'=>'required|length:11'
+        ]);
         $data=array(
+            'business_name'=>$request->business_name,
             'email'=>$request->email,
-            'password'=>$request->password
+            'password'=>$request->password,
+            'mobile'=>$request->mobile
         );
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => env('API_URL').'/api/register',
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        CURLOPT_CUSTOMREQUEST => 'POST',
-        CURLOPT_POSTFIELDS => $data,
-        // CURLOPT_HTTPHEADER => array(
-        //     'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzMjY0OTQ1MCwiZXhwIjoxNjMyNjUzMDUwLCJuYmYiOjE2MzI2NDk0NTAsImp0aSI6IkViUEFGb2JScWR5TjJXaFoiLCJzdWIiOjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.o4eR4tQ27d5rRI-B6JpnYOvJsUWgKXfKVAAc0RoRb9A'
-        // ),
+          CURLOPT_URL => env('API_URL').'/api/register',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS => $data,
+        //   CURLOPT_HTTPHEADER => array(
+        //     'Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9sb2dpbiIsImlhdCI6MTYzMjY1MTU2MiwiZXhwIjoxNjMyNjU1MTYyLCJuYmYiOjE2MzI2NTE1NjIsImp0aSI6InhEUjJDbmN6bXJleGJIZDkiLCJzdWIiOjYsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.C5En7J--UsgNuWoI5_P-ekDGun8jvvncJPcA9FAK7K8'
+        //   ),
         ));
-
+        
         $response = curl_exec($curl);
-
+        
         curl_close($curl);
+        echo $response;
         return  view('registration-success');
     }
     public function login(Request $request){
@@ -81,6 +90,7 @@ class UserController extends Controller
 
         curl_close($curl);
         
+       echo $response;
        
         if(!empty($response)){
             $response=json_decode($response);

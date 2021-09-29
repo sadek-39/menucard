@@ -17,7 +17,7 @@ class FoodController extends Controller
     {
         $data=array(
             'food_name'=>$request->food_name,
-            'quantity'=>$request->food_quantity,
+            'quantity'=>$request->quantity,
             'food_details'=>$request->food_details,
             'food_status'=>$request->food_status,
             'food_price'=>$request->food_price,

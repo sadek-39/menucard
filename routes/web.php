@@ -17,8 +17,8 @@ use App\Http\Controllers\QRCode;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('index');
 Route::get('/registerform',[UserController::class,'index'])->name('registerform');
 Route::post('/register',[UserController::class,'create'])->name('register');
 Route::post('/addnewfood',[FoodController::class,'index'])->name('add-new-food');
