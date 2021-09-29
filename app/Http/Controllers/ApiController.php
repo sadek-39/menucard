@@ -11,7 +11,7 @@ class ApiController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://localhost:8000/api/me',
+        CURLOPT_URL => env('API_URL').'/api/me',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -34,7 +34,7 @@ class ApiController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://localhost:8000/api/find_food/'.$id.'',
+        CURLOPT_URL => env('API_URL').'/api/find_food/'.$id.'',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -58,7 +58,7 @@ class ApiController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-        CURLOPT_URL => 'http://localhost:8000/api/create_food',
+        CURLOPT_URL => env('API_URL').'/api/create_food',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
