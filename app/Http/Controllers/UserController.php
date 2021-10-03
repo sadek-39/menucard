@@ -29,12 +29,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $request->validate([
-            'business_name'=>'required',
-            'email'=>'required',
-            'password'=>'required|min:6',
-            'mobile'=>'required|length:11'
-        ]);
+      
         $data=array(
             'business_name'=>$request->business_name,
             'email'=>$request->email,
