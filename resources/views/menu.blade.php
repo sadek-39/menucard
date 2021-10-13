@@ -1,3 +1,5 @@
+<?php var_dump($data_find_food);
+exit();  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +34,10 @@
                 <td>{{$item->food_details}}</td>
                 <td>{{$item->food_status}}</td>
                 <td>{{$item->food_price}}</td>
+                <?php
+                $image=base64_encode($item->food_image);
+                ?>
+                <td>{{$item->food_image}}</td>
             </tr>    
             @endforeach
             

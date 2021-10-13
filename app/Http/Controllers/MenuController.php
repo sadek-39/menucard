@@ -16,8 +16,12 @@ class MenuController extends Controller
     {
         $api_obj=new ApiController();
         $token=session('token');
+        $path="/images";
         $find_food=$api_obj->find_food($token,$id);
         $data=json_decode($find_food);
+        //file_put_contents($path."/", base64_decode($data['food_image']));
+        //var_dump($data);
+        
         return view("menu",['data_find_food'=>$data]);
     }
 
