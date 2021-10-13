@@ -85,13 +85,13 @@ class UserController extends Controller
 
         curl_close($curl);
         
-       echo $response;
+       
        
         if(!empty($response)){
             $response=json_decode($response);
             $token=$response->access_token;
             session(["token"=>$token]);
-            return redirect('/home');
+            return view('home');
         }else{
             return view('welcome');
         }

@@ -1,4 +1,7 @@
-
+<?php
+var_dump($data);
+exit();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
